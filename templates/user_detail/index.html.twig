@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserDetailController!{% endblock %}
+{% block title %}Détails de l'utilisateur {{ user_detail.username }}{% endblock %}
 
 {% block body %}
     <h1>{{ user_detail.firstname }} {{ user_detail.lastname }}</h1>
     <h4>Pseudo : {{ user_detail.username }}</h4>
-    <h4>Email : {{ user_detail.email }}</h4>
+{#    <h4>Email : {{ user_detail.email }}</h4>#}
     <h4>Liste des jeux</h4>
     <ul>
-        {% for product in user_detail.product %}
+        {% for product in user_detail.products %}
         <li>
-            {{ product.name}}
+            <a href="{{ path('product', {id : product.id}) }}">{{ product.name}}</a>
         </li>
         {% endfor %}
     </ul>

@@ -7,6 +7,6 @@
     <p>Ref : {{ product.ref }}</p>
     <p>{{ product.description }}</p>
     <p>{{ (product.price / 100) | format_currency("EUR", locale="fr") }}</p>
-    <p>proposé par {{ product.user.username }}</p>
+    <p>proposé par <a href="{{ path('user_detail', {id : product.user.id }) }}">{{ product.user.username }}</a></p>
 
 {% endblock %}
