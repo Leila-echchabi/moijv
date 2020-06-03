@@ -3,12 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ProductType extends AbstractType
 {
@@ -18,7 +20,11 @@ class ProductType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom'
             ])
-//            ->add('image')
+            ->add('imageFile', FileType::class/*, [
+                'constraints' => [
+                    new Image()
+                ]
+            ]*/)
             ->add('price', MoneyType::class, [
                 "currency" => "EUR",
                 'divisor' => 100,

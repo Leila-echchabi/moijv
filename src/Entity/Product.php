@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ * @Vich\Uploadable()
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
@@ -47,6 +51,13 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @Vich\UploadableField(mapping="products", fileNameProperty = "image")
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg"})
+     * @var File
+     */
+    private $imageFile;
 
     public function getId(): ?int
     {
@@ -124,4 +135,21 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return File
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
 }

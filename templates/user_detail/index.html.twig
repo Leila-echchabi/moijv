@@ -14,5 +14,7 @@
         </li>
         {% endfor %}
     </ul>
-
+    {% if app.user and app.user == user_detail%}
+    <a class="btn btn-primary" href="{{ path('add_product') }}">Ajouter un produit</a>
+    {% endif %}
 {% endblock %}

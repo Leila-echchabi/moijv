@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,13 +38,30 @@ class ProductController extends AbstractController
     }
 
     /**
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      * @Route("/product/add", name="add_product")
      */
 
-    public function addProduct()  {
-        $form = $this->createForm(ProductType::class);
-        $form->add('submit',SubmitType::class);
-        return $this->render('product/product-form.html.twig', [ 'form' => $form->createView()]);
+    public function addProduct(EntityManagerInterface $objectManager, Request $request)  {
+
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product); // App\Form\ProductType
+        $form->add('submit',SubmitType::class, [
+            'label' => "Ajouter votre produit"
+        ]);
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $user = $this->getUser();
+            $product->setUser($user);
+            $product->setRef(substr(str_shuffle(md5(random_int(0, 1000000))), 0, 25));
+            $objectManager->persist($product);
+            $objectManager->flush();
+            return $this->redirectToRoute('profile');
+        }
+        return $this->render('product/product-form.html.twig', [
+            'form' => $form->createView()]);
     }
 
 
