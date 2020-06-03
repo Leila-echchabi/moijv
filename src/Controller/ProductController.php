@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,6 +33,16 @@ class ProductController extends AbstractController
         return $this->render('product/detail.html.twig', [
             'product' => $product,
         ]);
+    }
+
+    /**
+     * @Route("/product/add", name="add_product")
+     */
+
+    public function addProduct()  {
+        $form = $this->createForm(ProductType::class);
+        $form->add('submit',SubmitType::class);
+        return $this->render('product/product-form.html.twig', [ 'form' => $form->createView()]);
     }
 
 

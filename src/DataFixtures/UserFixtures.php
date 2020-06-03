@@ -32,12 +32,12 @@ class UserFixtures extends Fixture
         for($i=0; $i<self::NB_USER; $i++){
             $user = new User();
 
-            $user->setUsername("Gamer$i");
-            $user->setEmail("prenom$i@test.com");
-            $user->setFirstname("Prenom $i");
-            $user->setLastname("Nom $i");
-            $user->setRoles(["ROLE_USER"]);
-            $user->setPassword($this->encoder->encodePassword($user, "passeword$i"));
+            $user->setUsername("Gamer$i")
+                ->setEmail("prenom$i@test.com")
+                ->setFirstname("Prenom $i")
+                ->setLastname("Nom $i")
+                ->setRoles(["ROLE_USER"])
+                ->setPassword($this->encoder->encodePassword($user, "password$i"));
 
             $this->addReference("user$i",$user);
             $manager->persist($user);
