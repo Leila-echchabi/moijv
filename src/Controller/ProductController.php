@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\Tag;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,5 +65,16 @@ class ProductController extends AbstractController
             'form' => $form->createView()]);
     }
 
+    /**
+    * @route("/product/tag/{slug}", name="products_by_tag")
+     */
+    public function productsByTag(Tag $tag/*, ProductRepository $productRepository*/) {
+        // SELECT * FROM products WHERE tag_id = :tag-id
+//        $products = $productRepository->findByTag($tag);
+        return $this->render('product/products_by_tag.html.twig', [
+            'tag' => $tag,
+//            'products'=> $products
+        ]);
+    }
 
 }

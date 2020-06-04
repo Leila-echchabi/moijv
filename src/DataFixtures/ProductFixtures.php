@@ -22,6 +22,13 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
             $product->setRef(substr(str_shuffle(md5(random_int(0, 1000000))), 0, 25));
             $product->setUser($this->getReference('user'.random_int(0, UserFixtures::NB_USER-1)));
 
+            $nb_tags = random_int(1,5);
+            for($j=0; $j<$nb_tags; $j++) {
+                $tagIndex = random_int(0, TagFixtures::NB_TAGS-1);
+                $product->addTag($this->getReference("tag$tagIndex"));
+            }
+
+
             $manager->persist($product);
         }
 
@@ -31,6 +38,7 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+            TagFixtures::class
         ];
     }
 }

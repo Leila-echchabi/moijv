@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Product;
+use App\Entity\Tag;
+use PUGX\AutocompleterBundle\Form\Type\AutocompleteType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -34,6 +36,9 @@ class ProductType extends AbstractType
                 'label' => 'Desription',
                 'attr' => [
                     "placeholder" =>"Saisir votre description"]
+            ])
+            ->add('tags', AutocompleteType::class, [
+                'class'=> Tag::class
             ])
         ;
     }

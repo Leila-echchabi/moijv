@@ -51,7 +51,7 @@
               <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
             </li>
             <li class="nav-item{% if app.request.get("_route") == "app_register" %} active{% endif %}">
-              <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+              <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
             </li>
 
           {% endif %}
@@ -231,6 +231,8 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+
+  {% block javascripts %}{% endblock %}
 
 </body>
 
