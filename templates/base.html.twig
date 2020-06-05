@@ -16,6 +16,8 @@
   <!-- Custom styles for this template -->
   <link href="{{asset('css/shop-homepage.css')}}" rel="stylesheet">
 
+  {% block stylesheets %}{% endblock %}
+
 </head>
 
 <body>
@@ -229,8 +231,8 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{{asset('js/jquery.min.js')}}"></script>
-  <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('js/jquery.js')}}"></script>
+  <script src="{{asset('js/bootstrap.bundle.js')}}"></script>
 
   {% block javascripts %}{% endblock %}
 
