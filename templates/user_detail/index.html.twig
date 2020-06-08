@@ -21,8 +21,18 @@
             <h4>Liste des jeux</h4>
             <ul>
                 {% for product in user_detail.products %}
+                    <table>
+
+                    </table>
                     <li>
                         <a href="{{ path('product', {id : product.id}) }}">{{ product.name}}</a>
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user == user_detail %}
+                        <a class="btn btn-danger btn-sm mt-2 text-right" href="#" onclick="if(confirm('Supprimer ?'))
+                            window
+                                .location
+                                .href='{{ path('delete_product', {id:product.id}) }}';">Supprimer</a>
+                        {% endif %}
                     </li>
                 {% endfor %}
             </ul>

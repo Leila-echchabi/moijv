@@ -22,11 +22,12 @@ class ProductType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom'
             ])
-            ->add('imageFile', FileType::class/*, [
-                'constraints' => [
-                    new Image()
-                ]
-            ]*/)
+            ->add('imageFile', FileType::class, [
+                'required'=>false,
+//                'constraints' => [
+//                    new Image()
+//                ]
+            ])
             ->add('price', MoneyType::class, [
                 "currency" => "EUR",
                 'divisor' => 100,

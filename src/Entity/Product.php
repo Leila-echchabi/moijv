@@ -66,9 +66,19 @@ class Product
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
+     */
+    private $category;
+
+
+
+
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -189,5 +199,20 @@ class Product
 
         return $this;
     }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+
+
 
 }
